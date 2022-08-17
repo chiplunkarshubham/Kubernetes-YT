@@ -1,0 +1,17 @@
+kind: Pod
+apiVersion: v1
+metadata:         #Pod ko kuch naam dena ho toh ya kuch description(annotations) dena hai toh
+  name: testpod
+  annotations:		# extra information, q banaya tha, kab banaya tha, kisne banaya tha (Optional) 
+    description: This is my first pod
+spec:
+  containers:
+    - name: c00
+      image: httpd
+      command: ["/bin/bash","-c","while true; do echo Hello-Shubham; sleep 5; done"]
+      ports: # Optional
+        - containerPorts: 80   # Can be accessed through worker node IP:80
+      env:      # Optional
+        - name: MYNAME
+          value: SHUBHAM
+  restartPolicy: Never     #Default: Always

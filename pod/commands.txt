@@ -1,0 +1,27 @@
+What are nodes, pods, annotations, env variables, how to expose port and how to go inside container inside the pod
+
+kubectl get nodes --> IP control-plane,master
+kubectl get nodes NODE_IP
+
+
+kubectl apply -f pod.yml --> testpod 1/1 Running (where testpod is the name of pod, 1/1 means 1 container is running inside it out of 1)
+
+kubectl get pods # if no pods are running then it will shoe "No resources found in default namespace"
+
+kubectl describe pod testpod # all info + gives the description mentioned in the annotation
+
+kubectl get pods -o wide #To get the worker node daetails on which the pod is running
+
+kubectl get pod P1
+
+kubectl logs -f testpod # To get the logs of the container in the pod named testpod(will work when there is only 1 container in the pod)
+
+kubectl logs -f testpod -c c00 # Useful for multiple containers running on the pod, just specify the name of the container
+
+kubectl delete pod testpod or kubectl delete -f pod.yml (delete the pod or delete the file that created the pod)
+
+kubectl exec -it testpod -c c00 -- hostname -I --> IP (container ki koi ip nahi hoti, pod ki IP hoti hai)
+
+kubectl exec -it testpod -c c00 -- /bin/bash
+docker exec -it 6f6f bash
+
