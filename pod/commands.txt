@@ -22,6 +22,39 @@ kubectl delete pod testpod or kubectl delete -f pod.yml (delete the pod or delet
 
 kubectl exec -it testpod -c c00 -- hostname -I --> IP (container ki koi ip nahi hoti, pod ki IP hoti hai)
 
-kubectl exec -it testpod -c c00 -- /bin/bash
+kubectl exec -it testpod -c c00 -- /bin/bash (for multi container) and   kubectl exec -it testpod -- /bin/bash (for 1 container inside pod)
 docker exec -it 6f6f bash
+
+**********************************************************************************************************************************************
+
+Create a pod object using kubectl run command with image xxxx and expose it on port 80 and name the pod as firstapp
+
+kubectl create deployment firstapp --image httpd --replicas 2 [--port 80]     # for creating a Pod we need to create deployment, verify [ye] pod ka hai ya container ka
+
+Deployment is a config template which makes sure pods are running if deleted
+
+kubectl expose deployment firstapp --port 8080 --target-port 80  --type LoadBalancer   # Deployment for Pod
+
+A: POD_IP:80
+B: WORKER_NODE_IP:8080
+C: WORKER_NODE_IP:31363
+
+C-->B-->A
+
+Service exposes the port (B) with the outside world with some random port (C) and maps B --> C
+
+kubectl get pods
+kubectl get deployments
+kubectl get services/svc
+kubectl get services/svc -o wide
+kubectl describe pod
+
+kubectl run sample-nginx --image nginx --port 80  # Create pod with name sample-nginx expose on 80 and image as nginx
+kubectl get pods -o wide --> NODE_IP
+curl NODE_IP:80 --> It Works
+
+
+
+svc/service
+deploy/deployment
 
