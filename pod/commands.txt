@@ -1,8 +1,8 @@
 What are nodes, pods, annotations, env variables, how to expose port and how to go inside container inside the pod
 
 kubectl get nodes --> IP control-plane,master
-kubectl get nodes NODE_IP
 
+kubectl get nodes NODE_IP
 
 kubectl apply -f pod.yml --> testpod 1/1 Running (where testpod is the name of pod, 1/1 means 1 container is running inside it out of 1)
 
