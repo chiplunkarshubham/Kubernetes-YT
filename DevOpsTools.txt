@@ -1,0 +1,18 @@
+Cloud: AWS, Azure, GCP
+OS: Linux
+Version Control: Git, SVN
+Remote Rep: Github, Gitlab, Bitbucket
+CI: Jenkins, Bamboo
+Scripting: Shell
+Configuration Management: Ansible
+IaC: Terraform
+Build Tool: Maven, Gradle, Ant
+Container: Docker, Docker Swarm, Docker Compose
+Container Orchestration: K8s
+Monitoring: nagios, promethius and grafana
+Logging: ELK
+Artifactory: Jfrog, Nexus
+Server: Apache, Nginx, Tomcat
+Code Quality: Sonarqube
+Performance Management: Jmeter
+Continuous Testing: Selenium

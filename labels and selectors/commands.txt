@@ -1,0 +1,69 @@
+declarative(manifest) vs imperative(command)
+
+Labels (Similar to tags in AWS) (Same dabbe par white label kitchen example) (can have one name or more, eg Bhupinder Rajput, bhupi sir, TG vale sir, Technical Guftgu)
+Search + Sort 
+label: for defining (can be applied to any object)
+selector: select karke laane me kaam aata hai, selector ki madat se label lage hue pod ko la sakte ho
+
+
+labels: 
+	for grouping or to filter out 
+	mechanism to organise K8s objects, 
+ 	they are key-value pairs
+	can be attached to objects
+	multiple labels can be given to single object
+	not unique (same label can be applied to multiple objects)
+
+kubectl get pods --show-labels
+kubectl get nodes --show-labels
+generic
+	kubectl get OBJECT --show-labels
+
+
+imperative way to apply labels:
+
+
+kubectl label OBJECT OBJECT_NAME LABEL
+OBJECT: Node, Pod, Deployment
+LABEL: name=shubham
+
+kubectl label pod mypod name=shubham
+kubectl get pods --show-labels
+
+selectors (get objects matching a label)
+
+get/list pods which match a label
+kubectl get pods -l env=development
+kubectl get pods -l env!=development
+
+delete pods using label
+kubectl delete pod -l env!=development
+
+
+2 types of label-selectors
+	1) equality based : =, != eg env=development or env=production kubectl get pods -l env=development
+	2) set based : in, notin, exists eg env in (development, production) or  env notin (development, production)for filtering out on multiple labels
+	3) multiple values based eg A and B and C (comma seperated) a=shubham,b=chiplunkar
+
+in and notin
+env in (dev,prod) means bring the pods which have label as dev first and then bring the pods which have label as prod (it does not means bring the pods which have both) and since it is set based duplicates nahi honge
+similar for notin
+env notin(dev, prod) means bring the pods which do not have label as dev first and then bring the pods which do not have labvel as prod, it does not mean bring pods which do not have both label
+
+kubectl get pods -l 'env in (development, testing)'    # set based
+kubectl get pods -l 'env notin (team1, team2)'    # set based
+kubectl get pods -l class=pods, name=shubham
+
+
+NodeSelector  ~ to node pools
+you can schedule that is you can tell a pod to only be able to run on particular nodes
+Steps
+	1. give label to node
+	2. use node selector to pod configuration
+
+  
+
+ 
+
+
+

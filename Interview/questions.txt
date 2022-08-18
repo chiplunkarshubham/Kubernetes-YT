@@ -1,0 +1,6 @@
+what is node, pod, env variables, annotations, how to go inside pod
+what are labels, selectors
+how many ways you can delete a pod --> by deleting the pod, .yml file or by using labels
+	kubectl delete pod mypod
+	kubectl delete -f mypod.yml (jis file se vo pod bana hai)
+	kubectl delete pod -l env!=development

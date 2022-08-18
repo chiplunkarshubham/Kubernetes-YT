@@ -1,0 +1,16 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mypod
+  labels:
+    env: development
+    class: pod
+  annotations:
+    description: This is to show how labels work
+spec:
+  containers:
+    - name: C01
+      image: nginx
+      command: ["/bin/bash","-c","while true; do echo Shubham Chiplunkar; sleep 5; done"]
+  nodeselector:
+    hardware: t2.medium
