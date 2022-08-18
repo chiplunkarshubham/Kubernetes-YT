@@ -1,0 +1,4 @@
+kubectl get rs
+
+kubectl scale --replicas=2 rs/myrs
+

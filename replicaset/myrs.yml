@@ -1,0 +1,22 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: myrs
+specs:
+  replicas: 2
+  selector:
+    matchExpressions:
+      - {key: myname, operator: In, values: [Shubham, Shub, Shubha]}
+      - {key: env, operator: NotIn, values: [prod]}
+  template:
+    metadata:
+      name: Shubham
+      label: 
+        myname: Shub
+    spec:
+      containers:
+        - name: C00
+	  image: ubuntu
+	  command: ["/bin/bash","-c","while true; do echo Shubham Chiplunkar; sleep 5; done"]
+      
+  

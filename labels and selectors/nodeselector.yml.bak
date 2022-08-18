@@ -13,4 +13,4 @@ spec:
       image: nginx
       command: ["/bin/bash","-c","while true; do echo Shubham Chiplunkar; sleep 5; done"]
   nodeSelector:
-    hardware: t2.medium   # label the node first before applying this command
+    hardware: t2.medium   # label the node first before

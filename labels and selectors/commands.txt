@@ -58,7 +58,11 @@ kubectl get pods -l class=pods, name=shubham
 NodeSelector  ~ to node pools
 you can schedule that is you can tell a pod to only be able to run on particular nodes
 Steps
-	1. give label to node
+	1. give label to node  -  
+		kubectl get nodes --> Name is ip-172-31-24-55
+		kubectl label node ip-172-31-24-55 hardware=t2.medium
+		how to check
+			kubectl get pods nodelabel (Check events)
 	2. use node selector to pod configuration
 
   

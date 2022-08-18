@@ -1,0 +1,31 @@
+Scaling and Replication
+
+Replication : for HA, replicas=2, if one pod gets failed then the customer should be served by another pod till the first one gets created again, to ensure no downtime
+ 
+
+Scaling : for scale up and down according to load
+selector values should match label values specified in the pod template   
+
+kubectl get rc  (rc is ReplicationController) 
+
+Scaling:
+scale-up	kubectl scale --replicas=10 rc -l name=Shubham (rc is replication controller, -l is label, and name=Shubham is the label given to the pod)
+scale-down      kubectl scale --replicas=1 rc -l name=Shubham
+
+
+in this case deleting the pod wont help as it will try to maintain the current-desired, so you have to delete the yaml file
+kubectl delete -f myrc.yml
+
+
+ReplicationController used version 1
+It supports equality based selectors whereas ReplicaSet(advanced version of  ReplicationController) supports equality as well as set based selectors
+3 differences between them
+
+for rc, kind: ReplicationConytroller, apiVersion: v1,          equality based selectors
+for rs, kind: ReplicaSet,             apiVersion: apps/v1,     equality based + set based selectors (advanced version of rc)
+
+
+
+
+
+      
