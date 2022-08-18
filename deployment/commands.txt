@@ -1,0 +1,70 @@
+ReplicationController and ReplicaSet is not able to do updates and rollback (back and out)
+
+deployment uses replicaset to supervise pods (direct nahi krega)
+
+self healing current=desired
+diff in .yaml as compared to ReplicaSet is just 1 change (kind: Deployment and matchlabel:)
+
+when you update the .yml file and apply it, new replica set and pods gets created and the previous rs is stopped and pod is deleted, but they are not deleted as they can be useful in he case of rollback (as we know pods once deleted cannot be restarted so when restarted again new pods will be created but the rs will remain the same, we can verify by the rs id)
+
+scale up and down the deploymets
+
+deployments can be paused and can be later resumed
+
+clean up rs which you dont need anymore
+
+
+deploymentA-->RSA-->1 POD         deploymentB-->RSB-->4 PODS     now i did rollback   so deploymentA-->RSA-->4 PODS     the code will remain the same as of dep A but the number of pods will be the same as from where it is rollbacked i.e from B to A and B had 4 so A will also have 4 after rollback
+
+
+kubectl get deploy
+kubectl describe deploy mydeployment
+kubectl get rs
+kubectl get pods
+
+
+Deployment creates ReplicaSet and ReplicaSet creates Pod
+let name of deployment is mydeployment
+then the name of ReplicaSet will be mydeployment-ABCD
+and since ReplicaSet creates Pod, the name of pod will be mydeployment-ABCD-1234
+
+
+
+To scale up and down the deployment
+kubectl scale --replicas 2 deploy mydeployment
+
+To check what is running inside the container
+kubectl logs -f <podname>
+kubectl exec <podname> -- cat /etc/os-release
+
+kubectl rollout status deploy mydeployment --> ye batata hai status ki rollback karne par ya apply karne par update kaisae hore hai like 2/3 abhi tak hue hai, gives indication how the rollback is happening on the pods, give it after you again use apply that is after doing some changes to yml file, or when you do undo, changes can be seen when you have more pods tabhi dikh ke aayega kaisae hora hai sab
+
+kubectl rollout history deployment mydeployment  --> to check how many versions or revisions (how many times have you used apply that many versions gets created)
+kubectl rollout undo deployment mydeployment --> rollback to the just previous version
+kubectl rollout status deploy mydeployment --> here to see how undo command se pod are comming to live
+
+if there are problems in the deployment, kubernetes will automatically roll back to the previous version, however you can also explicitly rollback to a specific revision
+kubectl rollout undo deployment mydeployment --to-revision=2 --> to rollback to a specific revision
+
+
+Deployment can fail due to some of the reasons
+
+1) image pull error : (the path mentioned is not correct or does not exists)
+2) Insufficient Quota (Node does not have space to accomodate more pods)
+3) rediness probe failure
+4) insufficient permissions (you dont have permission to pull from a repo)
+5) application runtime misconfigurations
+6) Limit Ranges
+
+
+if there are 2 pods A got created first and B later, now i want to scale down to 1 pod only, then the newest pod(B) will be deleted
+
+
+
+
+
+
+
+
+
+

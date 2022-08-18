@@ -1,0 +1,19 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mydeployment
+spec:
+  replicas: 2
+  selector:
+    matchlabels:
+      name: deployment
+  template:
+    metadata:
+      name: mypod
+      labels:
+        name: deployment
+    spec:
+      containers:
+        - name: C01
+          image: nginx
+          command: ["/bin/bash","-c","while true; do echo Shubham Chiplunkar; sleep 5; done"]
