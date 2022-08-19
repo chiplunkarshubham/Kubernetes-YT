@@ -1,0 +1,67 @@
+kubernetes get pods -n abc  (where abc is namespace)
+kubernetes get pods (goes to default namespace)
+
+
+namespace is used to logically separate projects it can be wrt team, area, project, location 
+to see the pods in the namespace you have to go in the namespace
+you can define resource quota for the namespace as well, how much resources can this namespace use how much cpu memory storage, you can define that eg abc namespace ca use only 10GB storage, so no. of pods inside it will at max use 10GB only
+
+
+2 jagah agar same kaam chal raha hai but for diff projects so its easy to understand and differntiate and for no confusion sake so we create namespace to keep them different
+
+also not all projects will req same no. of resources, so with the help of namespace we can allocate the project only that much resources which it needs
+
+example
+
+college/university : Cluster
+classrooms for CSE, EE, IE, IT : namespaces
+CSE needs computers : resource quota
+EE needs circuits : resource quota
+
+we can allocate the resources according to the namespace
+
+
+by default, K8s cluster will create defult namespace to hold pods, services and deployments used by the cluster
+
+we can specify the resource quota for specifying how may resources(CPU, RAM, Storage) each namespace can use
+
+most k8s resources like pods, deploy, svc, rc and rs are part of namespace, but nodes and persistent volumes does not belong the namespace they belong to cluster level
+
+kubectl get namespaces
+
+RBAC
+
+lets assume we have shared k8s cluster for dev and prod
+
+the dev team would like to maintain a space in the cluster where they can get a view on the list of Pods, services and deployment they use to build and run their applications, In this no restrictions are put on who can or cannot modify resources to enavle agile development
+
+
+for prod team, we can enforce strict procedures on who can or cannot manipulate the set of pods, services and deployments
+
+kubectl get pods -n dev
+
+but how to go in namespace so that i do not use -n dev again and again
+
+
+kubectl config set-context $(kubectl config current-context) --namespace dev
+
+kubectl apply -f pod.yml -n dev (when you have not set the context to dev or you have not specified the namespace in the yml file)
+
+kubectl delete -f pod.yml -n dev
+
+things done in one namespace has no effect on other namespace, apna apna locker room types
+
+how to check which namespace you are working on
+
+kubectl config view | grep namespace:
+
+
+
+
+
+
+
+
+
+
+ 
