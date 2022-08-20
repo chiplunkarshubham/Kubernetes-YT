@@ -22,11 +22,12 @@ kubectl delete pod testpod or kubectl delete -f pod.yml (delete the pod or delet
 
 ***********************************   Use kubectl exec [POD] -- [COMMAND]    *************************
 
-kubectl exec -it testpod -c c00 -- hostname -I --> IP (container ki koi ip nahi hoti, pod ki IP hoti hai)
+kubectl exec testpod -c c00 -- hostname -I --> IP (container ki koi ip nahi hoti, pod ki IP hoti hai)
 
 kubectl exec -it testpod -c c00 -- /bin/bash (for multi container) and   kubectl exec -it testpod -- /bin/bash (for 1 container inside pod)
 docker exec -it 6f6f bash
 
+use -it only when you have to go inside the container, else just use: kubectl exec mypod -- cat /etc/os-release
 **********************************************************************************************************************************************
 
 Create a pod object using kubectl run command with image xxxx and expose it on port 80 and name the pod as firstapp
