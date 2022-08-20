@@ -1,17 +1,20 @@
 kind: Pod
 apiVersion: v1
 metadata:         #Pod ko kuch naam dena ho toh ya kuch description(annotations) dena hai toh
-  name: testpod
+  name: testpod    # name must be lower alphanumeric
+  namespace: dev    # yml or kubectl create namespace dev
+  labels:
+    name: Shubham
   annotations:		# extra information, q banaya tha, kab banaya tha, kisne banaya tha (Optional) 
     description: This is my first pod
 spec:
   containers:
-    - name: c00
+    - name: c00      # name must be lower alphanumeric
       image: httpd
-      command: ["/bin/bash","-c","while true; do echo Hello-Shubham; sleep 5; done"]
-      ports: # Optional
-        - containerPorts: 80   # Can be accessed through worker node IP:80
-      env:      # Optional
-        - name: MYNAME
+      command: ["/bin/bash","-c","while true; do echo $MYNAME; sleep 5; done"]
+      ports: # Optional ports with an s
+        - containerPort: 80   # Can be accessed through worker node IP:80, containerPorts with an s
+      env:      # Optional ans is an array
+        - name: MYNAME    
           value: SHUBHAM
   restartPolicy: Never     #Default: Always

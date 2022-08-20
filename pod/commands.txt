@@ -20,6 +20,8 @@ kubectl logs -f testpod -c c00 # Useful for multiple containers running on the p
 
 kubectl delete pod testpod or kubectl delete -f pod.yml (delete the pod or delete the file that created the pod)
 
+***********************************   Use kubectl exec [POD] -- [COMMAND]    *************************
+
 kubectl exec -it testpod -c c00 -- hostname -I --> IP (container ki koi ip nahi hoti, pod ki IP hoti hai)
 
 kubectl exec -it testpod -c c00 -- /bin/bash (for multi container) and   kubectl exec -it testpod -- /bin/bash (for 1 container inside pod)
@@ -57,4 +59,6 @@ curl NODE_IP:80 --> It Works
 
 svc/service
 deploy/deployment
-
+ns/namespace
+rs/replicaset
+rc/replicationcontroller

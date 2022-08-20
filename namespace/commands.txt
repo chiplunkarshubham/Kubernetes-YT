@@ -1,3 +1,5 @@
+kubectl create namespace abc
+
 kubernetes get pods -n abc  (where abc is namespace)
 kubernetes get pods (goes to default namespace)
 
