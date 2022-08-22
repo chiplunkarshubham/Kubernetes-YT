@@ -1,0 +1,14 @@
+# Port number kiske pass jayega VIP ke pass, VIP node k andar ke pod ke sath conected hai and pod  me container hai
+# expose the port number in the sg after service is created else give all traffic
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: myservice
+spec:
+  selector:
+    name: deployment]
+  ports:
+    - port: 80
+      targetport: 80
+  type: NodePort

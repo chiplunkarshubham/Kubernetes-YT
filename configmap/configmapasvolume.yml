@@ -1,0 +1,26 @@
+# configmap virtual memory me ek file rakhenge vo file worker node k #volume me aa jayegi and then vo container ke pass aayegi
+
+#pehle ek file bana sample.conf and usme content daal
+# kubectl create configmap mymap --from-file=sample.conf
+
+#kubectl decsribe configmap mymap
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myvolconfig
+spec:
+  containers:
+    - name: c1
+      image: centos
+      command: ["/bin/bash","-c","sleep 1500"]
+      volumeMounts:
+        - name: testconfigmap
+	  mountpath: /tmp/config
+  volumes:
+    - name: testconfigmap # this should map with the name which we ccreated below
+      configmap:
+        name: mymap  # this should map the config map name that we created
+        items:
+	  - key: sample.conf
+	  - path: sample.conf

@@ -1,0 +1,44 @@
+Container to container communcation on the same pod happens through localhost
+
+let say we have 1 pod, and 2 containers 1. ubuntu and 2. httpd, we will go inside ubuntu, and we will type localhost:80, we will get a response "It works" from the httpd server which is on httpd container on port 80
+
+after going in the ubuntu container, do apt update && apt install curl
+
+Normally 1 pod must have 1 container
+
+Communication between the pods in the same node : through IP address since pod1(httpd) and pod2(nginx) will have IP, also expose it on some port lets say 80
+
+lets say we have 2 pods, in the same node, one having nginx and other httpd and both exposed on port 80, both can access each other via pod ip(kubectl get pods -o wide)
+
+Also, by default Pods IP will not be accessible outside the node
+
+pod is a volatile object, and rs makes sure that current=desired, so when pod goes down it creates new one, and the new pod had diff IP, also the new pod might get created in a diff node from the previous
+
+
+service provides a virtual ip address to object, here to rs
+
+Problem: If some set of pods(call them 'backend') provide functionality to other pods ('call then frontend') inside your cluster, how do the frontends find out and keep track of which IP address to connect to, so that the frontend can use the backend part of the workload
+
+When to use services
+
+1) when using RD, pods are terminated and created during scaling or replication operations
+
+2) when using deployments, while updating the image version the pods are terminated and new pods take the place of other pod
+
+3) Pods are very dynamic i.e they come and go on the K8s cluster and on any of the available nodes and it would be very difficult to access the pods as the pods IP change once its recreated
+
+4) Service object is an logical bridge between pods and end users, which provides virtual IP  (VIP)
+
+5) Service allows clients(end user, front end service) to reliably connect to the containers running in the pod using the VIP
+
+6) The VIp is not an actual IP connected to a network interface, but its purpose is purely to forward traffic to one or more pods
+
+7) kubeproxy is the one which keeps the mapping between the VIP and the pods upto date and the pods upto date, it queries the API server to learn about new services in the cluster
+
+8) Although each pod has a unique IP address, those IPs are not exposed outside the cluster
+
+9) 
+
+
+
+

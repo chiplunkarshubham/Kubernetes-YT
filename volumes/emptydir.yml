@@ -1,0 +1,29 @@
+#  Volume pod me hota hai, pod se connected hota hai, container vohi container pe data daal raha hota hai ya access kar raha hota hai
+# if pod fails then the volume assoicted also fails
+
+# create a pod with 2 containers sharing 1 common volume
+
+# Volume inside a pod : EmptyDir
+# hostpath node k andar
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: Mypod
+spec:
+  containers:
+    - name: c00
+      image: nginx
+      command: ["/bin/bash","-c","sleep 15000"]
+      volumeMounts:
+        - name: xchange
+    	  mountPath: "/tmp/xchange"
+    - name: c01
+      image: nginx
+      command: ["/bin/bash","-c", "sleep 15000"]
+      volumeMounts:
+        - name: xchange
+   	  mountPath: "/tmp/data"
+  volumes:
+    - name: xchange
+      emptyDir: {} 

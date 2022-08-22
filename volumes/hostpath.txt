@@ -1,0 +1,16 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: c00
+      image: httpd
+      command: ["/bin/bash","-c","sleep 5000"]
+      volumeMounts:
+        - name: testvolume
+  	  mountPath: /tmp/hostpath
+  volumes:
+    - name: testvolume
+      hostpath:
+        path: /tmp/data

@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fresco-pv
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /tmp/fresco
+
+
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fresco-pvc
+spec:
+  storageClassName: manual  # 2 baar aaya yaha ek baar and pv me ek baar
+  accessModes:	            # 2 baar aaya yaha ek baar and pv me ek baar
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fresco-nginx-pod
+spec:
+  volumes:
+    - name: pv
+      persistentVolumeClaim:
+        claimName: fresco-pvc
+  containers:
+    - name: task-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: pv
