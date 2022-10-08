@@ -12,7 +12,7 @@ Container Orchestration: K8s
 Monitoring: nagios, promethius and grafana
 Logging: ELK
 Artifactory: Jfrog, Nexus
-Server: Apache, Nginx, Tomcat
+Server: Apache, Nginx, Tomcat, JBoss
 Code Quality: Sonarqube
 Performance Management: Jmeter
 Continuous Testing: Selenium
