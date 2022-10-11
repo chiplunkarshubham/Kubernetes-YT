@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 2
   selector:
-    matchlabels:
+    matchLabels:
       name: deployment
   template:
     metadata:
