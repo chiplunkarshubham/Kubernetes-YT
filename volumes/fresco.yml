@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -10,9 +11,7 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: /tmp/fresco
-
-
-
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -24,9 +23,7 @@ spec:
   resources:
     requests:
       storage: 50Mi
-
-
-
+---
 apiVersion: v1
 kind: Pod
 metadata:
