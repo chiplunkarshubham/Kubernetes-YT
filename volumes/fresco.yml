@@ -1,4 +1,52 @@
 ---
+kubectl create configmap fresco-config --from-literal SERVER_URL=https://www.fresco.me
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fresco-nginx-pod
+  spec:
+    containers:
+      - name: fresco-nginx-container
+        image: nginx
+	env:
+	- name: SERVER_URL_ENV
+	  valueFrom:
+	    configMapKeyRef:
+	      name: fresco-config
+	      key: SERVER_URL
+---
+apiVersion: v1
+kind: Secret
+metadata:  
+  name: fresco-secret
+type: Opaque
+data:
+  username: admin
+  password: pass
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fresco-nginx-pod
+  spec:
+    containers:
+      - name: fresco-nginx-container
+        image: nginx
+	env:
+	- name: SERVER_URL_ENV
+	  valueFrom:
+	    configMapKeyRef:
+	      name: fresco-config
+	      key: SERVER_URL
+        volumeMounts:
+        - name: test
+          mountPath: "/etc/test"
+    volumes:
+    - name: test
+      secret:
+        secretName: fresco-secret
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
